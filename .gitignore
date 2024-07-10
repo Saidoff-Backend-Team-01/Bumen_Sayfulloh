@@ -263,5 +263,8 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,django
+
+.DS_Store
+
 .env.example
 .env
