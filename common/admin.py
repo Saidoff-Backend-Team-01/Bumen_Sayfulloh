@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Media
 
-# Register your models here.
+@admin.register(MEDIA)
+class MediaAdmin(admin.ModelAdmin):
+    # list_display = ('type', 'file')
+    pass
+
