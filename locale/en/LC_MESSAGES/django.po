@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 #: core/settings.py:142
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: core/settings.py:143
 msgid "Uzbek"
-msgstr ""
+msgstr "Uzbek"
 
 #: core/settings.py:144
 msgid "Russian"
-msgstr ""
+msgstr "Russian"
