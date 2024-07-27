@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from news.models import News, NewsImange
+from news.models import News, NewsImage
 from common.serializers import MediaURlSerializer
 
 
@@ -12,10 +11,10 @@ class NewsListSerializer(serializers.ModelSerializer):
         fields = ("id", "create_at", "title", "description", "image", "is_publish")
 
 
-class NewsImangeSerializer(serializers.ModelSerializer):
+class NewsImageSerializer(serializers.ModelSerializer):
     file = MediaURlSerializer(read_only=True)
     news = MediaURlSerializer(read_only=True)
     
     class Meta:
-        model = NewsImange
+        model = NewsImage
         fields = ("id", "file", "news")

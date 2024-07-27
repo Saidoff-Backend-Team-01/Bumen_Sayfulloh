@@ -1,48 +1,49 @@
 from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
-from yaml import serialize
-from company.models import ContactUs, FAQ, Contacts, Sponsor, PrivacyPolicy, AppInfo, SocialMedia
-from company.serializers import ContactWithUsSerializer, FAQSerializer, ContactsSerializer, SocialMediaSerializer, AppInfoSerializer, PrivacyPolicySerializer, SponsorSerializer
+from company.models import ContactUsWeb
+from company.serializers import AppInfoSerializer, ContactsSerializer, ContactUsWebSerializer, FAQSerializer, PrivacyPolicySerializer, SocialMediaSerializer, SponsorSerializer
+from .models import FAQ, AppInfo, Contacts, PrivacyPolicy, SocialMedia, Sponsor, ContactUsWeb
 
 
-class ContactWithUsView(CreateAPIView):
-    queryset = ContactUs.objects.all()
-    serializer_class = ContactWithUsSerializer
-    
+class ContactUsWebView(CreateAPIView):
+    queryset = ContactUsWeb.objects.all()
+    serializer_class = ContactUsWebSerializer
 
-class ContactView(CreateAPIView):
+
+class ContactView(ListAPIView):
     queryset = Contacts.objects.all()
     serializer_class = ContactsSerializer
-    
-    
-class FAQAPIView(APIView):
+
+
+class FaqApiView(APIView):
     serializer_class = FAQSerializer
+
     def get(self, request, *args, **kwargs):
         try:
-            queryset = FAQ.objects.all()
-            serializer = FAQSerializer(queryset, many=True)
-            return Response(serializer.data)
+            seralizer = FAQSerializer(FAQ.objects.all(), many=True)
+            return Response(seralizer.data, status=200)
         except Exception:
-            return Response(data={"message": "Something went wrong."}, status=500)
-      
-        
-class SocialMediaView(CreateAPIView):
+            return Response(data={"message": "Internal Server Error"}, status=500)
+
+
+class SocialMediaView(ListAPIView):
     queryset = SocialMedia.objects.all()
     serializer_class = SocialMediaSerializer
-    
-    
-class AppInfoView(CreateAPIView):
+
+
+class AppInfoView(ListAPIView):
     queryset = AppInfo.objects.all()
     serializer_class = AppInfoSerializer
-    
-    
-class PrivacyPolicyView(CreateAPIView):
+
+
+class PrivacyPolicyView(ListAPIView):
     queryset = PrivacyPolicy.objects.all()
     serializer_class = PrivacyPolicySerializer
-    
-    
-class SponsorView(CreateAPIView):
+
+
+class SponsorView(ListAPIView):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer

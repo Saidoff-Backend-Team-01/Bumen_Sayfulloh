@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
-from .models import News, NewsImange
-from .serializers import NewsListSerializer, NewsImangeSerializer
+from .models import News, NewsImage
+from .serializers import NewsListSerializer, NewsImageSerializer
 
 
 class NewsListView(ListAPIView):
@@ -9,12 +9,13 @@ class NewsListView(ListAPIView):
     serializer_class = NewsListSerializer
 
     def get_queryset(self):
-        return self.queryset.order_by("-created_at")
+        return self.queryset.order_by("-create_at")
     
     
 class NewsImageView(ListAPIView):
-    queryset = NewsImange.objects.all()
-    serializer_class = NewsImangeSerializer
+    
+    queryset = NewsImage.objects.all()
+    serializer_class = NewsImageSerializer
     
     def get_queryset(self):
         return self.queryset.filter(news=self.kwargs["news_id"])

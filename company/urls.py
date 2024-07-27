@@ -3,9 +3,9 @@ from .views import *
 app_name = 'company'
 
 urlpatterns = [
-    path("contactus/", ContactWithUsView.as_view(), name="contact_with_us"),
+    path("contactus/", ContactUsWebView.as_view(), name="contact_with_us"),
     path("contact/", ContactView.as_view(), name="contact"),
-    path("faqs/", FAQAPIView.as_view(), name="faqs"),
+    path("faqs/", FaqApiView.as_view(), name="faqs"),
     path("socialmedia/", SocialMediaView.as_view(), name="socialmedia"),
     path("appinfo/", AppInfoView.as_view(), name="appinfo"),
     path("privacypolicy/", PrivacyPolicyView.as_view(), name="privacypolicy"),

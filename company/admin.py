@@ -1,6 +1,5 @@
-from encodings import search_function
 from django.contrib import admin
-from .models import Contacts, SocialMedia, AppInfo, FAQ, PrivacyPolicy, Sponsor, ContactUs
+from .models import Contacts, SocialMedia, AppInfo, FAQ, PrivacyPolicy, Sponsor, ContactUsWeb
 
 
 @admin.register(Contacts)
@@ -38,7 +37,7 @@ class SponsorAdmin(admin.ModelAdmin):
     list_display = ['image', 'url']
 
 
-@admin.register(ContactUs)
-class ContactUsAdmin(admin.ModelAdmin):
+@admin.register(ContactUsWeb)
+class ContactUsWebAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone_number', 'message']
     search_fields = ['phone_number']
