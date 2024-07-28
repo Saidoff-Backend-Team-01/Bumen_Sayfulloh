@@ -1,5 +1,7 @@
 from django.urls import reverse
+
 from news.models import News
+
 # from rest_framework.test import APITestCase
 # from rest_framework import status
 # from django.utils import timezone
@@ -9,7 +11,7 @@ from news.models import News
 
 #     def setUp(self):
 #         pass
-    
+
 #     def test_news(self):
 #         url = reverse('news:news_list')
 #         data = {

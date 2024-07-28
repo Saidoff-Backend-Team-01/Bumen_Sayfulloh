@@ -1,10 +1,17 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from rest_framework import status
 from rest_framework.test import APITestCase
 
 from common.models import Media
-from company.models import FAQ, AppInfo, Contacts, ContactUsWeb, PrivacyPolicy, SocialMedia, Sponsor
+from company.models import (
+    FAQ,
+    AppInfo,
+    Contacts,
+    ContactUsWeb,
+    PrivacyPolicy,
+    SocialMedia,
+    Sponsor,
+)
 
 
 class TestCompanyViews(APITestCase):

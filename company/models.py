@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
@@ -90,31 +89,34 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return str(self.url)
-    
-        
+
 
 class ContactWithCategory(models.Model):
     name = models.CharField(_("name"), max_length=255)
-    
+
     class Meta:
         verbose_name = _("Contact With Category")
         verbose_name_plural = _("Contact With Categories")
-        
+
     def __str__(self):
         return str(self.name)
-    
-    
+
+
 class ContactWithUsReason(models.Model):
     name = models.CharField(_("name"), max_length=255)
-    category = models.ForeignKey(ContactWithCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(
+        ContactWithCategory, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
 
 class ContactWithUsMobile(models.Model):
     email = models.EmailField(_("email"))
-    reason = models.ForeignKey(ContactWithUsReason, on_delete=models.SET_NULL, null=True, blank=True)
+    reason = models.ForeignKey(
+        ContactWithUsReason, on_delete=models.SET_NULL, null=True, blank=True
+    )
     message = models.TextField(_("message"))
     file = models.ForeignKey(Media, on_delete=models.SET_NULL, null=True, blank=True)
-    
+
     class Meta:
         verbose_name = _("Contact With Us Mobile")
         verbose_name_plural = _("Contact With Us Mobiles")

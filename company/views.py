@@ -3,9 +3,27 @@ from rest_framework import generics
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from company.models import ContactUsWeb
-from company.serializers import AppInfoSerializer, ContactsSerializer, ContactUsWebSerializer, FAQSerializer, PrivacyPolicySerializer, SocialMediaSerializer, SponsorSerializer
-from .models import FAQ, AppInfo, Contacts, PrivacyPolicy, SocialMedia, Sponsor, ContactUsWeb
+from company.serializers import (
+    AppInfoSerializer,
+    ContactsSerializer,
+    ContactUsWebSerializer,
+    FAQSerializer,
+    PrivacyPolicySerializer,
+    SocialMediaSerializer,
+    SponsorSerializer,
+)
+
+from .models import (
+    FAQ,
+    AppInfo,
+    Contacts,
+    ContactUsWeb,
+    PrivacyPolicy,
+    SocialMedia,
+    Sponsor,
+)
 
 
 class ContactUsWebView(CreateAPIView):

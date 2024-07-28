@@ -1,6 +1,15 @@
 from rest_framework import serializers
 
-from .models import FAQ, AppInfo, Contacts, ContactUsWeb, PrivacyPolicy, SocialMedia, Sponsor
+from .models import (
+    FAQ,
+    AppInfo,
+    Contacts,
+    ContactUsWeb,
+    PrivacyPolicy,
+    SocialMedia,
+    Sponsor,
+)
+
 
 class ContactUsWebSerializer(serializers.ModelSerializer):
     class Meta:

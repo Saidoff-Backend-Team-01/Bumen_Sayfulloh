@@ -1,6 +1,8 @@
 from django.urls import path
+
 from .views import *
-app_name = 'company'
+
+app_name = "company"
 
 urlpatterns = [
     path("contactus/", ContactUsWebView.as_view(), name="contact_with_us"),

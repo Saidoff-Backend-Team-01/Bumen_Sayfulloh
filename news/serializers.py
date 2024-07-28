@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from news.models import News, NewsImage
+
 from common.serializers import MediaURlSerializer
+from news.models import News, NewsImage
 
 
 class NewsListSerializer(serializers.ModelSerializer):
@@ -14,7 +15,7 @@ class NewsListSerializer(serializers.ModelSerializer):
 class NewsImageSerializer(serializers.ModelSerializer):
     file = MediaURlSerializer(read_only=True)
     news = MediaURlSerializer(read_only=True)
-    
+
     class Meta:
         model = NewsImage
         fields = ("id", "file", "news")
