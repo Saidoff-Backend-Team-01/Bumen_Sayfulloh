@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 """
 
+import os
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
@@ -156,9 +157,13 @@ LANGUAGES = [
 STATIC_URL = "static/"
 MEDIA_URL = "/media/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+if DEBUG == True:
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
+else:
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
