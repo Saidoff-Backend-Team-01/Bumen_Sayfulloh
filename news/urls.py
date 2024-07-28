@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import NewsListView, NewsImageView
-
 app_name = 'news'
 
 urlpatterns = [

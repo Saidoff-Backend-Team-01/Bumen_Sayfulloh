@@ -15,6 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class SubjectTitle(models.Model):
     name = models.CharField(_('name'), max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
@@ -96,6 +97,7 @@ class Club(models.Model):
     def __str__(self):
         return self.name
 
+
 class UserClub(models.Model):
     user = models.ManyToManyField(User, related_name="users")
     club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True, blank=True)
@@ -120,6 +122,7 @@ class ClubMeetings(models.Model):
     def __str__(self):
         return self.name
 
+
 class StepLesson(models.Model):
     step = models.ForeignKey(Step, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=255)
@@ -131,6 +134,7 @@ class StepLesson(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class StepTest(models.Model):
     QUESTION_TYPE_CHOICES = [
@@ -155,6 +159,7 @@ class StepTest(models.Model):
 
     def __str__(self):
         return f"{self.step} - {self.step_test_type}"
+
 
 class TestQuestion(models.Model):
     steptest = models.ForeignKey(StepTest, on_delete=models.SET_NULL, null=True, blank=True)
