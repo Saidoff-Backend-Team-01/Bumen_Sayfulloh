@@ -1,19 +1,17 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import Group, User, UserMessage
-from .serializers import GroupSerializer, UserMessageSerializer, UserSerializer
+from .models import User
+from .serializers import UserSerializer
 
 
-class ProfileApiView(ListAPIView):
-    queryset = User.objects.all()
+class ProfileApiView(APIView):
     serializer_class = UserSerializer
 
+    def get(self, request, *args, **kwargs):
+        try:
+            seralizer = UserSerializer(User.objects.all(), many=True)
+            return Response(seralizer.data, status=200)
 
-class GroupApiView(ListAPIView):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
-
-class ProfileMessageApiView(ListAPIView):
-    queryset = UserMessage.objects.all()
-    serializer_class = UserMessageSerializer
+        except Exception:
+            return Response(data={"message": "Internal Server Error"}, status=500)

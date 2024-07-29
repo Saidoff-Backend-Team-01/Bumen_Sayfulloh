@@ -26,21 +26,3 @@ class TestAccount(APITestCase):
         count = User.objects.count()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(count, 2)
-
-    def test_get_group(self):
-        self.group.users.set([self.user])
-        url = reverse("account:group")
-        response = self.client.get(url)
-        count = Group.objects.count()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(count, 1)
-
-    def test_user_message(self):
-        UserMessage.objects.create(
-            user=self.user, message="TestUser", file=self.media, group=self.group
-        )
-        url = reverse("account:profile_message")
-        response = self.client.get(url)
-        count = UserMessage.objects.count()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(count, 1)
