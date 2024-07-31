@@ -1,16 +1,38 @@
 from django.contrib import admin
-from django.utils.html import format_html
 
-from .models import User
+from .models import Groups, User, UserMessage, UserOtpCode
 
 
-@admin.register(User)
+class UserMessageInlineAdmin(admin.StackedInline):
+    model = UserMessage
+    extra = 1
+
+
 class UserAdmin(admin.ModelAdmin):
-    list_display_fields = ["first_name", "last_name", "birth_date", "show_image"]
-    list_filter = ["first_name", "birth_date"]
-    search_fields = ["first_name"]
+    inlines = [UserMessageInlineAdmin]
+    list_display = ("id", "username", "email")
 
-    def show_image(self, obj):
-        if obj.photo:
-            return format_html('<img src="{}" width="50px" />'.format(obj.image.url))
-        return "No Image"
+
+admin.site.register(User, UserAdmin)
+
+admin.site.register(Groups)
+
+
+class UserMessageAdmin(admin.ModelAdmin):
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+
+admin.site.register(UserMessage, UserMessageAdmin)
+
+
+@admin.register(UserOtpCode)
+class UserOtpCodeAdmin(admin.ModelAdmin):
+    list_display = ("id", "user", "code", "type")

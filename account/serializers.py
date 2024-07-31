@@ -1,9 +1,14 @@
 from rest_framework import serializers
 
-from .models import Group, User, UserMessage
+from account.models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "birth_date", "photo")
+        fields = ("first_name", "last_name", "email", "password")
+
+
+class UserOtpCodeVerifySerializer(serializers.Serializer):
+    code = serializers.IntegerField(required=True)  # todo: add validation
+    email = serializers.EmailField(required=True)
