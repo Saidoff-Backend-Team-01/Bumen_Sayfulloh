@@ -39,7 +39,7 @@ class SocialMediaSerializer(serializers.ModelSerializer):
 class AppInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppInfo
-        fields = ("title", "description")
+        fields = ("id", "title", "description")
 
     def create(self, validated_data):
         return AppInfo.objects.create(**validated_data)

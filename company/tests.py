@@ -7,7 +7,7 @@ from company.models import (
     FAQ,
     AppInfo,
     Contacts,
-    ContactUsWeb,
+    ContactWithUs,
     PrivacyPolicy,
     SocialMedia,
     Sponsor,
@@ -28,7 +28,7 @@ class TestCompanyViews(APITestCase):
         }
         response = self.client.post(url, data, format="json")
         print(response)
-        count = ContactUsWeb.objects.count()
+        count = ContactWithUs.objects.count()
         self.assertEqual(response.status_code, 201)
         self.assertEqual(count, 1)
 
@@ -69,7 +69,7 @@ class TestCompanyViews(APITestCase):
 
     def test_app_info(self):
         data = AppInfo.objects.create(
-            title="Test App", desc="This is a test app description."
+            title="Test App", description="This is a test app description."
         )
         url = reverse("company:appinfo")
         response = self.client.get(url)
@@ -88,8 +88,8 @@ class TestCompanyViews(APITestCase):
     def test_sponsor(self):
         test_image = SimpleUploadedFile(
             name="software.png",
-            content=open("media/software.png", "rb").read(),
-            content_type="image/png",
+            content=open("media/admin.jpeg", "rb").read(),
+            content_type="image/jpeg",
         )
         media = Media.objects.create(file=test_image)
         data = Sponsor.objects.create(

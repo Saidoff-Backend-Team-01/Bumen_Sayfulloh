@@ -1,19 +1,44 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.auth.models import BaseUserManager
 from common.models import Media
 
 
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+
 class User(AbstractUser):
+    username = None
     birth_date = models.DateField(_("birth_date"), null=True, blank=True)
     photo = models.ForeignKey(Media, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField(_("email address"), unique=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    objects = CustomUserManager()
+
     def __str__(self) -> str:
-        return self.username
+        return self.email
 
     class Meta:
         verbose_name = _("User")

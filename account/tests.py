@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase
 
 from common.models import Media
 
-from .models import Group, User, UserMessage
+from .models import User
 
 
 class TestAccount(APITestCase):
@@ -14,7 +14,6 @@ class TestAccount(APITestCase):
             last_name="Doe",
             birth_date="1990-01-01",
         )
-        self.group = Group.objects.create(name="TestGroup")
         self.media = Media.objects.create(file="path/to/file")
 
     def test_get_profile(self):

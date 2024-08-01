@@ -23,8 +23,7 @@ class UserRegisterView(CreateAPIView):
             user=user,
             code=code,
             type=UserOtpCode.VerificationType.REGISTER,
-            expires_in=timezone.now()
-            + timedelta(minutes=settings.OTP_CODE_VERIFICATION_TIME),
+            expires_in=timezone.now() + timedelta(minutes=settings.OTP_CODE_VERIFICATION_TIME),
         )
         send_verification_code(user.email, new_otp_code.code)
 
@@ -35,38 +34,22 @@ class UserRegisterVerifyView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
-
             data = self.serializer_class(data=request.data)
             if not data.is_valid():
-                return Response(
-                    status=status.HTTP_400_BAD_REQUEST, data={"message": "Invalid data"}
-                )
+                return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Invalid data"})
             user = User.objects.get(email=data.data["email"])
-            user_otp_code = UserOtpCode.objects.filter(
-                user=user, code=data.data["code"], is_used=False
-            )
+            user_otp_code = UserOtpCode.objects.filter(user=user, code=data.data["code"], is_used=False)
             if not user_otp_code.exists():
-                return Response(
-                    status=status.HTTP_404_NOT_FOUND,
-                    data={"message": "otp code not found"},
-                )
+                return Response(status=status.HTTP_404_NOT_FOUND, data={"message": "otp code not found"})
             user_otp_code = user_otp_code.filter(expires_in__gte=timezone.now())
             if not user_otp_code.exists():
-                return Response(
-                    status=status.HTTP_400_BAD_REQUEST,
-                    data={"message": "otp code was expired"},
-                )
+                return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "otp code was expired"})
 
             user.is_active = True
             user.save()
             otp_code = user_otp_code.first()
             otp_code.is_used = True
             otp_code.save()
-            return Response(
-                status=status.HTTP_200_OK, data={"message": "user is activated"}
-            )
+            return Response(status=status.HTTP_200_OK, data={"message": "user is activated"})
         except User.DoesNotExist:
-            return Response(
-                status=status.HTTP_404_NOT_FOUND,
-                data={"message": "User does not exist"},
-            )
+            return Response(status=status.HTTP_404_NOT_FOUND, data={"message": "User does not exist"})
