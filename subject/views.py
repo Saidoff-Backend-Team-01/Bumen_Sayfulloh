@@ -1,15 +1,8 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from .models import Subject
 from .serializers import SubjectSerializer
 
 
-class SubjectApiView(APIView):
+class SubjectApiView(ListAPIView):
+    queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-
-    def get(self, request, *args, **kwargs):
-        try:
-            seralizer = SubjectSerializer(Subject.objects.all(), many=True)
-            return Response(seralizer.data, status=200)
-        except Exception:
-            return Response(data={"message": "Internal Server Error"}, status=500)

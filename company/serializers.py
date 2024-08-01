@@ -16,9 +16,6 @@ class ContactsSerializer(serializers.ModelSerializer):
         model = Contacts
         fields = ("address", "phone_number", "email", "location")
 
-    def create(self, validated_data):
-        return Contacts.objects.create(**validated_data)
-
 
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,17 +29,11 @@ class SocialMediaSerializer(serializers.ModelSerializer):
         model = SocialMedia
         fields = ("telegram", "facebook", "instagram", "linkedin")
 
-    def create(self, validated_data):
-        return SocialMedia.objects.create(**validated_data)
-
 
 class AppInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppInfo
         fields = ("id", "title", "description")
-
-    def create(self, validated_data):
-        return AppInfo.objects.create(**validated_data)
 
 
 class PrivacyPolicySerializer(serializers.ModelSerializer):
@@ -50,14 +41,8 @@ class PrivacyPolicySerializer(serializers.ModelSerializer):
         model = PrivacyPolicy
         fields = ("text",)
 
-    def create(self, validated_data):
-        return PrivacyPolicy.objects.create(**validated_data)
-
 
 class SponsorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = ("image", "url")
-
-    def create(self, validated_data):
-        return Sponsor.objects.create(**validated_data)
