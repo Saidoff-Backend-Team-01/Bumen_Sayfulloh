@@ -1,23 +1,14 @@
 from rest_framework import serializers
-
-from .models import (
-    FAQ,
-    AppInfo,
-    Contacts,
-    ContactUsWeb,
-    PrivacyPolicy,
-    SocialMedia,
-    Sponsor,
-)
+from .models import FAQ, AppInfo, Contacts, ContactWithUs, PrivacyPolicy, SocialMedia, Sponsor
 
 
 class ContactUsWebSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ContactUsWeb
+        model = ContactWithUs
         fields = ("name", "phone_number", "message")
 
     def create(self, validated_data):
-        return ContactUsWeb.objects.create(**validated_data)
+        return ContactWithUs.objects.create(**validated_data)
 
 
 class ContactsSerializer(serializers.ModelSerializer):
@@ -48,7 +39,7 @@ class SocialMediaSerializer(serializers.ModelSerializer):
 class AppInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppInfo
-        fields = ("title", "desc")
+        fields = ("title", "description")
 
     def create(self, validated_data):
         return AppInfo.objects.create(**validated_data)

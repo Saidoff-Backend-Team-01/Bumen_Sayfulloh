@@ -3,8 +3,6 @@ from rest_framework import generics
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from company.models import ContactUsWeb
 from company.serializers import (
     AppInfoSerializer,
     ContactsSerializer,
@@ -19,7 +17,7 @@ from .models import (
     FAQ,
     AppInfo,
     Contacts,
-    ContactUsWeb,
+    ContactWithUs,
     PrivacyPolicy,
     SocialMedia,
     Sponsor,
@@ -27,7 +25,7 @@ from .models import (
 
 
 class ContactUsWebView(CreateAPIView):
-    queryset = ContactUsWeb.objects.all()
+    queryset = ContactWithUs.objects.all()
     serializer_class = ContactUsWebSerializer
 
 

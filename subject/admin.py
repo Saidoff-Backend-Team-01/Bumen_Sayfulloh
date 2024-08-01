@@ -18,7 +18,7 @@ from .models import (
     Vacancy,
 )
 
-
+    
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display_fields = ["name", "clicked_count"]

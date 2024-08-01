@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-    FAQ,
-    AppInfo,
-    Contacts,
-    ContactUsWeb,
-    PrivacyPolicy,
-    SocialMedia,
-    Sponsor,
-)
+from .models import FAQ, AppInfo, Contacts, ContactWithUs, PrivacyPolicy, SocialMedia, Sponsor
 
 
 @admin.register(Contacts)
@@ -26,8 +18,8 @@ class SocialMediaAdmin(admin.ModelAdmin):
 
 @admin.register(AppInfo)
 class AppInfoAdmin(admin.ModelAdmin):
-    list_display = ["title", "desc"]
-    list_filter = ["title", "desc"]
+    list_display = ["title", "description"]
+    list_filter = ["title", "description"]
 
 
 @admin.register(FAQ)
@@ -46,7 +38,7 @@ class SponsorAdmin(admin.ModelAdmin):
     list_display = ["image", "url"]
 
 
-@admin.register(ContactUsWeb)
+@admin.register(ContactWithUs)
 class ContactUsWebAdmin(admin.ModelAdmin):
     list_display = ["name", "phone_number", "message"]
     search_fields = ["phone_number"]
